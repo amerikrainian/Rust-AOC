@@ -1,0 +1,8 @@
+[package]
+name = "scaffold"
+version = "0.1.0"
+edition.workspace = true
+
+[dependencies]
+clap = { version = "4.5.53", features = ["derive"] }
+toml_edit = "0.23.9"

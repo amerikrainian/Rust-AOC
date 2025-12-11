@@ -1,0 +1,12 @@
+[workspace]
+members = [
+    "runner",
+    "util",
+    "scaffold",
+    "years/2015",
+]
+default-members = ["runner"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
