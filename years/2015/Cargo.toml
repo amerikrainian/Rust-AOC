@@ -1,0 +1,8 @@
+[package]
+name = "aoc2015"
+version = "0.1.0"
+edition.workspace = true
+
+[dependencies]
+
+[build-dependencies]
