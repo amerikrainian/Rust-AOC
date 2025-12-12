@@ -7,5 +7,6 @@ edition.workspace = true
 aoc_utils = { version = "0.1.0", path = "../../aoc_utils" }
 itoa = "1.0.15"
 md-5 = "0.10.6"
+serde_json = "1.0.145"
 
 [build-dependencies]
