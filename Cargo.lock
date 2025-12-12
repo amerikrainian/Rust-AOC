@@ -56,9 +56,14 @@ dependencies = [
 name = "aoc2015"
 version = "0.1.0"
 dependencies = [
+ "aoc_utils",
  "itoa",
  "md-5",
 ]
+
+[[package]]
+name = "aoc_utils"
+version = "0.1.0"
 
 [[package]]
 name = "block-buffer"

@@ -3,7 +3,7 @@ members = [
     "runner",
     "util",
     "scaffold",
-    "years/2015",
+    "years/2015", "aoc_utils",
 ]
 default-members = ["runner"]
 resolver = "2"
