@@ -152,6 +152,18 @@ impl<T: Clone + Display> Grid<T> {
             data: vec![default; width * height],
         }
     }
+
+    pub fn map<U: Clone + Display, F: Fn(Point, &T) -> U>(&self, f: F) -> Grid<U> {
+        let mut out = Grid::new(self.width, self.height, f(Point::new(0, 0), &self.data[0]));
+        for p in self.coords() {
+            out[p] = f(p, &self[p]);
+        }
+        out
+    }
+
+    pub fn count<F: Fn(&T) -> bool>(&self, pred: F) -> usize {
+        self.data.iter().filter(|v| pred(v)).count()
+    }
 }
 
 impl<T: Display> Grid<T> {
@@ -163,6 +175,7 @@ impl<T: Display> Grid<T> {
     pub fn width(&self) -> usize {
         self.width
     }
+
     pub fn height(&self) -> usize {
         self.height
     }
@@ -218,6 +231,25 @@ impl<T: Display> Grid<T> {
             x: (p.x % w + w) % w,
             y: (p.y % h + h) % h,
         }
+    }
+
+    pub fn get_wrap(&self, p: Point) -> &T {
+        let q = self.wrap(p);
+        &self.data[self.index(q)]
+    }
+
+    pub fn get_mut_wrap(&mut self, p: Point) -> &mut T {
+        let q = self.wrap(p);
+        let idx = self.index(q);
+        &mut self.data[idx]
+    }
+
+    pub fn neighbors4_wrap(&self, p: Point) -> impl Iterator<Item = Point> + '_ {
+        Direction::ALL.into_iter().map(move |d| self.wrap(p + d))
+    }
+
+    pub fn neighbors8_wrap(&self, p: Point) -> impl Iterator<Item = Point> + '_ {
+        Dir8::ALL.into_iter().map(move |d| self.wrap(p + d))
     }
 
     pub fn row(&self, y: isize) -> Option<impl Iterator<Item = &T>> {
