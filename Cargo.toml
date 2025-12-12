@@ -4,6 +4,7 @@ members = [
     "util",
     "scaffold",
     "years/2015", "aoc_utils",
+    "years/2016",
 ]
 default-members = ["runner"]
 resolver = "2"
