@@ -18,7 +18,10 @@ fn main() {
             let file_name_str = file_name.to_string_lossy();
 
             if file_name_str.starts_with("day") && file_name_str.ends_with(".rs") {
-                if let Some(day_str) = file_name_str.strip_prefix("day").and_then(|s| s.strip_suffix(".rs")) {
+                if let Some(day_str) = file_name_str
+                    .strip_prefix("day")
+                    .and_then(|s| s.strip_suffix(".rs"))
+                {
                     if let Ok(day_num) = day_str.parse::<u32>() {
                         days.push((day_num, file_name_str.to_string()));
                     }
@@ -44,7 +47,10 @@ fn main() {
 
     for (day_num, file_name) in &days {
         let mod_name = file_name.strip_suffix(".rs").unwrap();
-        days_output.push_str(&format!("        {} => crate::{}::solve(input),\n", day_num, mod_name));
+        days_output.push_str(&format!(
+            "        {} => crate::{}::solve(input),\n",
+            day_num, mod_name
+        ));
     }
 
     days_output.push_str("        _ => panic!(\"Day {} not implemented\", day),\n");
