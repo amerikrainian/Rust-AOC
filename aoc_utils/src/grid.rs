@@ -298,3 +298,30 @@ impl<T: Display> Display for Grid<T> {
         Ok(())
     }
 }
+
+impl From<&str> for Grid<char> {
+    fn from(s: &str) -> Self {
+        let lines: Vec<&str> = s.lines().collect();
+        let height = lines.len();
+        let width = lines.first().map_or(0, |l| l.len());
+
+        assert!(
+            lines.iter().all(|l| l.len() == width),
+            "Grid::from: non-rectangular input"
+        );
+
+        let data = lines.into_iter().flat_map(|l| l.chars()).collect();
+
+        Grid {
+            width,
+            height,
+            data,
+        }
+    }
+}
+
+impl<T: Display + PartialEq> Grid<T> {
+    pub fn find(&self, needle: T) -> Option<Point> {
+        self.coords().find(|&p| self[p] == needle)
+    }
+}
