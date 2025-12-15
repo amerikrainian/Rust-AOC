@@ -76,6 +76,8 @@ name = "aoc2016"
 version = "0.1.0"
 dependencies = [
  "aoc_utils",
+ "itoa",
+ "md-5",
 ]
 
 [[package]]
